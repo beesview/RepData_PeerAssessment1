@@ -77,8 +77,8 @@ The `mean` is 1.0766189 &times; 10<sup>4</sup> and the `median` is 10765.
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ### Solutions:
-* Calculate avg steps for every intervals for every day
-* Plot the Avg Steps per Day by Interval. 
+* Calculate avg steps for every day by every intervals 
+* Plot the Avg Steps by Interval. 
 * Find interval with max average steps. 
 
   
@@ -103,14 +103,13 @@ The 5-minute interval, on average across all the days in the data set, containin
 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 ### Solutions:
-*Missing values will be filled by the average for each interval. For example, if 10-01-2012 interval 0 was missing, it'll be filled by the average for that interval for all days. 
+* Missing values will be filled by the average for each interval. For example, if 10-01-2012 interval 0 was missing, it'll be filled by the average for that interval for all days. 
   
   ```r
-  	incomplete <- sum(!complete.cases(actData))
   	imputedData <- transform(actData, steps = ifelse(is.na(actData$steps), steps_by_interval$steps[match(actData$interval, steps_by_interval$interval)], actData$steps))
   ```
 
-*Recount total steps by day and create Histogram. 
+* Recount total steps by day and create Histogram. 
   
   ```r
   	steps_by_day1 <- aggregate(steps ~ date, imputedData, sum)
@@ -121,14 +120,14 @@ The 5-minute interval, on average across all the days in the data set, containin
   
   ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
-*Calculate new mean and median for imputed data. 
+* Calculate new mean and median for imputed data. 
   
   ```r
   	rmean1 <- mean(steps_by_day1$steps)
   	rmedian1 <- median(steps_by_day1$steps)
   ```
 
-*Calculate difference between imputed and non-imputed data.
+* Calculate difference between imputed and non-imputed data.
   
   ```r
   	mean_diff <- rmean1 - rmean
